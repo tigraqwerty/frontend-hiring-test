@@ -1,0 +1,69 @@
+<div class="page-calls-list">
+	<mat-toolbar color="primary" class="page-calls-list__toolbar">
+		<mat-toolbar-row class="mat-elevation-z2">
+			<span>Call list</span>
+			<span class="example-spacer"></span>
+			<button mat-icon-button [matMenuTriggerFor]="menu">
+				<mat-icon>more_vert</mat-icon>
+			</button>
+			<mat-menu #menu="matMenu">
+				<button mat-menu-item (click)="changeEditMode()">Archive/Unarchive</button>
+			</mat-menu>
+		</mat-toolbar-row>
+		<mat-toolbar-row class="page-calls-list__toolbar--secondary" *ngIf="isEditMode">
+			<button mat-flat-button color="primary" (click)="editCallback(true)">Confirm</button>
+			<span class="example-spacer"></span>
+			<button mat-stroked-button color="primary" (click)="editCallback(false)">Cancel</button>
+		</mat-toolbar-row>
+
+	</mat-toolbar>
+	<div class="page-calls-list__content call-list" [ngClass]="{'page-calls-list__content--edit': isEditMode}">
+		<div class="call-list__item list-item" [ngClass]="{'list-item--archived': call.is_archived}"
+			*ngFor="let call of calls | filterByField:'call_type':selectedCallType">
+			<div class="list-item__icon">
+				<mat-icon [color]="callDirectionIcon[call.direction].color">{{
+					callDirectionIcon[call.direction].icon }}
+				</mat-icon>
+			</div>
+			<div class="list-item__content">
+				<div>{{call.from}}</div>
+				<div>{{call.call_type | uppercase}}<span *ngIf="call.is_archived"> - Archived</span></div>
+				<div>{{call.created_at | date}}</div>
+			</div>
+			<div>
+				<mat-checkbox *ngIf="isEditMode" [(ngModel)]="selectedCalls[call.id]"></mat-checkbox>
+				<button *ngIf="!isEditMode" mat-icon-button (click)="viewDetails(call.id)">
+					<mat-icon color="primary">chevron_right</mat-icon>
+				</button>
+			</div>
+		</div>
+		<div class="list-item" *ngIf="calls.length !== 0 && hasNextPage">
+			<button mat-flat-button (click)="loadMore()">Load more</button>
+		</div>
+	</div>
+	<div class="page-calls-list__footer" *ngIf="!isEditMode">
+		<mat-button-toggle-group class="call-filter" [(ngModel)]="selectedCallType">
+			<mat-button-toggle class="call-filter__item" [value]="null">
+				<div class="call-filter__item-content">
+					<div>
+						<mat-icon>list</mat-icon>
+					</div>
+					<div>
+						ALL
+					</div>
+				</div>
+			</mat-button-toggle>
+			<mat-button-toggle class="call-filter__item" *ngFor="let callType of callTypes" [value]="callType.title">
+				<div class="call-filter__item-content">
+					<div>
+						<mat-icon>{{callType.icon}}</mat-icon>
+					</div>
+					<div>
+						{{callType.title | uppercase}}
+					</div>
+				</div>
+			</mat-button-toggle>
+
+		</mat-button-toggle-group>
+	</div>
+</div>

@@ -1,0 +1,4 @@
+<main class="router-container" [@routeAnimation]="getDepth(outlet)">
+	<router-outlet #outlet="outlet"></router-outlet>
+	<app-loader [state]="isLoaderActive"></app-loader>
+</main>
