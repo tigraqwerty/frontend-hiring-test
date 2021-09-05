@@ -27,13 +27,10 @@ describe('NotFoundComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-<<<<<<< HEAD
 
   it('should call to router navigation', () => {
     component.goBack();
 
     expect(routerSpy).toHaveBeenCalled();
   });
-=======
->>>>>>> master
 });
