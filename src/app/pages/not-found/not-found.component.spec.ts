@@ -1,4 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { Router } from '@angular/router';
+
+let routerSpy = { navigate: jasmine.createSpy('navigate') };
 
 import { NotFoundComponent } from './not-found.component';
 
@@ -8,9 +12,10 @@ describe('NotFoundComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NotFoundComponent ]
-    })
-    .compileComponents();
+      declarations: [NotFoundComponent],
+      schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],
+      providers: [{ provide: Router, useValue: routerSpy }],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +26,11 @@ describe('NotFoundComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should call to router navigation', () => {
+    component.goBack();
+
+    expect(routerSpy).toHaveBeenCalled();
   });
 });

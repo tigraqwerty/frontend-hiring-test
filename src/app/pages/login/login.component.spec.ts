@@ -8,12 +8,12 @@ import { NotificationService } from '@core/services/notification/notification.se
 
 import { LoginComponent } from './login.component';
 
-const NotificationServiceMock = {
+let NotificationServiceMock = {
   setLoader: () => {},
   clearLoading: () => {},
 };
 
-const AuthServiceMock = {
+let AuthServiceMock = {
   auth: of(true),
 };
 
