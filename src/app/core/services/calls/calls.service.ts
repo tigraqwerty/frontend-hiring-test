@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 import { RequestService } from '../request/request.service';
 import { CallDetailsModel } from '@core/models/call-details.model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class CallsService {
   constructor(private _requestService: RequestService) {}
 

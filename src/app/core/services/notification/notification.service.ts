@@ -3,7 +3,9 @@ import { Observable, Subject } from 'rxjs';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class NotificationService {
   private loadingSubject: Subject<boolean> = new Subject();
   public $loading: Observable<boolean> = this.loadingSubject.asObservable();
