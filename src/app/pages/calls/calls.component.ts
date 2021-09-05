@@ -2,14 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-calls',
-  templateUrl: './calls.component.html',
-  styleUrls: ['./calls.component.scss']
+  template: '<router-outlet></router-outlet>',
+  styleUrls: ['./calls.component.scss'],
 })
 export class CallsComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

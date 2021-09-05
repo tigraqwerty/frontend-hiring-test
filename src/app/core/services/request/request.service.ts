@@ -12,7 +12,9 @@ import { IUser } from '@core/models/user.interface';
 import { GraphQLProvider } from './providers/graph-ql.provider';
 import { RestAPIProvider } from './providers/rest-api.provider';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class RequestService {
   private provider: IRequestProvider = new RestAPIProvider(this._http);
 

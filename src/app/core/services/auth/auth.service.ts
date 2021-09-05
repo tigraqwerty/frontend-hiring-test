@@ -7,7 +7,9 @@ import { RequestService } from '../request/request.service';
 import { IUser } from '@core/models/user.interface';
 import { localStorageKeys } from '@core/constants/local-storage-keys.constant';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthService {
   private _authRefreshInterval: any;
   constructor(private _requestService: RequestService) {}
