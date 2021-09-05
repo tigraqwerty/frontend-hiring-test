@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-not-found',
   templateUrl: './not-found.component.html',
-  styleUrls: ['./not-found.component.scss']
+  styleUrls: ['./not-found.component.scss'],
+  host: {
+    class: 'router-container',
+  },
 })
-export class NotFoundComponent implements OnInit {
+export class NotFoundComponent {
+  constructor(private _router: Router) {}
 
-  constructor() { }
-
-  ngOnInit(): void {
+  public goBack(): void {
+    this._router.navigate(['/login']);
   }
-
 }
